@@ -2,3 +2,22 @@ h1 {
     color: blue;
 }
 
+h2 {
+    color: rgb(0, 0, 0);
+}
+
+header {
+    background-color: #ffffff;
+    padding: 30px;
+    text-align: center;
+    font-size: 35px;
+    color: rgb(82, 98, 177);
+}
+
+section::after {
+    background-color: #000000;
+    content: "";
+    display: table;
+    clear: both;
+}
+
