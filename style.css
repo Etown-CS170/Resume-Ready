@@ -15,9 +15,9 @@ header {
 }
 
 section {
-    padding: 20px; /* Add padding for better visibility */
-    background-color: #f0f0f0; /* Light background color for contrast */
-    margin: 20px; /* Optional: add margin for spacing */
+    padding: 20px; 
+    background-color: #f0f0f0; 
+    margin: 20px;
 }
 
 section::after {
