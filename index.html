@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Resume Ready</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
     <header>
         <h1>Resume Ready</h1>
         <h2>Welcome to Resume Ready</h2>
@@ -22,11 +19,13 @@
             <div class="output-container">
                 <label for="resume-preview">Your Resume Preview:</label> 
                 <div id="resume-preview">This area will display your resume.</div>
+                <button id="download-button">Download as .docx</button>
             </div>
         </div>
     </section>
-    <p></p>
+
+    <script src="https://cdn.jsdelivr.net/npm/docx-js@1.0.1/dist/docx.min.js"></script>
     <script src="app.js"></script>
 </body>
-
 </html>
+
