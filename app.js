@@ -4,92 +4,61 @@ document.addEventListener('DOMContentLoaded', function () {
     const sendButton = document.getElementById('send-button');
     const downloadButton = document.getElementById('download-button');
 
-    function parseSections(inputText) {
-        const lines = inputText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+    async function generateResumeUsingLlama(inputText) {
+        try {
 
-        const name = lines[0] || 'No name provided';
-        const contact = lines[1] || 'No contact information provided';
-        const linkedin = lines[2] || 'No LinkedIn profile provided';
-        const addressPhoneEmail = contact.split('|').map(item => item.trim());
-        const address = addressPhoneEmail[0] || 'No address provided';
-        const phone = addressPhoneEmail[1] || 'No phone provided';
-        const email = addressPhoneEmail[2] || 'No email provided';
-        const education = lines[3] || 'No education provided';
-        const workExperience = lines[4] || 'No work experience provided';
-        const relatedProjects = lines[5] || 'No related projects provided';
-        const certifications = lines[6] || 'No certifications provided';
-        const skills = lines[7] || 'No skills provided';
+            const response = await fetch('http://localhost:1234/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    messages: [
+                        {
+                            role: "system",
+                            content: `You are a helpful assistant that creates professional resumes. Format the response in HTML with the following specifications
+                            (If something is not provided, please still format it in the correct way. Everything must be on its appropriate line.):
+                            - Use Aptos font for the entire document
+                            - First line: Full name (First and Last), centered, 18pt font, bold
+                            - Second line: centered, 12pt font, format: "City, State, Zipcode | Phone | Email"
+                            - Third line: centered, 12pt font, format: "LinkedIn: [URL]", not a hyperlink
+                            - Add line break after LinkedIn
+                            - Rest of content is left-aligned, 12pt font
+                            - Include the following sections in order with 12pt font (each with a line underneath):
+                              1. Education (with bullet points)
+                              2. Work Experience (with bullet points)
+                              3. Related Projects (with bullet points)
+                              4. Certificates (with bullet points)
+                              5. Skills (with bullet points)
+                            - Add line break between each section
+                            Format all of this in clean, semantic HTML with appropriate styling.`
+                        },
+                        {
+                            role: "user",
+                            content: inputText
+                        }
+                    ],
+                    stream: false,
+                    max_tokens: 2000,
+                    temperature: 0.7
+                }),
+            });
 
-        return {
-            name,
-            linkedin,
-            address,
-            phone,
-            email,
-            education,
-            workExperience,
-            relatedProjects,
-            certifications,
-            skills
-        };
+            const data = await response.json();
+            return data.choices[0].message.content || 'No resume data generated.';
+        } catch (error) {
+            console.error('Error generating resume:', error);
+            return 'Error generating resume. Make sure LM Studio is running on port 1234.';
+        }
     }
 
-    function generateResumeContent(sections) {
-        const resumeContent = `
-            <div style="text-align: center;">
-                <h1><strong>${sections.name}</strong></h1>
-                <p>${sections.address} | ${sections.phone} | ${sections.email}</p>
-                <p>LinkedIn: ${sections.linkedin}</p>
-            </div>
-            <div style="text-align: left;">
-                <div class="resume-section">
-                    <strong>Education</strong>
-                    <hr>
-                    <ul>
-                        <li>${sections.education}</li>
-                    </ul>
-                </div>
-                <div class="resume-section">
-                    <strong>Work Experience</strong>
-                    <hr>
-                    <ul>
-                        <li>${sections.workExperience}</li>
-                    </ul>
-                </div>
-                <div class="resume-section">
-                    <strong>Related Projects</strong>
-                    <hr>
-                    <ul>
-                        <li>${sections.relatedProjects}</li>
-                    </ul>
-                </div>
-                <div class="resume-section">
-                    <strong>Certifications</strong>
-                    <hr>
-                    <ul>
-                        <li>${sections.certifications}</li>
-                    </ul>
-                </div>
-                <div class="resume-section">
-                    <strong>Skills</strong>
-                    <hr>
-                    <ul>
-                        <li>${sections.skills}</li>
-                    </ul>
-                </div>
-            </div>
-        `;
-        return resumeContent;
-    }
-
-    sendButton.addEventListener('click', function () {
+    sendButton.addEventListener('click', async function () {
         sendButton.disabled = true;
         sendButton.textContent = 'Processing...';
         resumePreview.innerHTML = 'Generating resume...';
 
         const inputText = userInput.value;
-        const sections = parseSections(inputText);
-        const resumeContent = generateResumeContent(sections);
+        const resumeContent = await generateResumeUsingLlama(inputText);
 
         resumePreview.innerHTML = resumeContent;
 
@@ -100,15 +69,14 @@ document.addEventListener('DOMContentLoaded', function () {
     downloadButton.addEventListener('click', function () {
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF();
+
         const content = resumePreview.innerHTML;
 
-        pdf.html(resumePreview, {
-            callback: function (doc) {
-                doc.save('Resume.pdf');
-            },
-            margin: [10, 10, 10, 10],
-            autoPaging: true
-        });
+        const simpleContent = content.replace(/<\/?[^>]+(>|$)/g, ""); 
+
+        pdf.text(simpleContent, 10, 10);
+
+        pdf.save('Resume.pdf');
     });
 });
 

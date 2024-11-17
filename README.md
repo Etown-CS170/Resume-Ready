@@ -2,7 +2,8 @@
 # Resume-Ready
 
 Run in LM Studio LLama 3.2B.
-Input: 
+
+Input example: 
 
 John Doe
 Email: johndoe@example.com, Phone: 123-456-7890
