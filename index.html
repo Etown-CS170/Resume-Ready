@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume Ready</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -14,17 +16,19 @@
             <div class="input-container">
                 <label for="user-input">Enter Your Information:</label>
                 <textarea id="user-input" placeholder="Type your information here..."></textarea>
-                <button id="send-button">Send to AI</button>
+                <button id="send-button">Generate Resume</button>
             </div>
             <div class="output-container">
-                <label for="resume-preview">Your Resume Preview:</label> 
+                <div class="output-header">
+                    <label for="resume-preview">Your Resume Preview:</label>
+                    <button id="download-button">Download as PDF</button>
+                </div>
                 <div id="resume-preview">This area will display your resume.</div>
-                <button id="download-button">Download as .docx</button>
             </div>
         </div>
     </section>
-
-    <script src="https://cdn.jsdelivr.net/npm/docx-js@1.0.1/dist/docx.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

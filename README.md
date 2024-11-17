@@ -1,13 +1,17 @@
 
 # Resume-Ready
 
-Cursor AI helped me with creating the index.html. For example:
-link rel="stylesheet" href="style.css"
-ChatGPT helped me with setting up horizontal layout.
+Run in LM Studio LLama 3.2B.
+Input: 
 
-Style.css has 2 containers, 1 for input, 1 for output. 
-
-To currently run, start the lm sudio server with Llama 3.2 on port 1234 with CORS enabled along with Serve on local network. Then open the index.html file.
+John Doe
+Email: johndoe@example.com, Phone: 123-456-7890
+LinkedIn: https://www.linkedin.com/in/johndoe
+B.S. in Computer Science from ABC University
+3 years as a Full Stack Developer at XYZ Corp
+Project X, Project Y
+Certified Scrum Master (CSM)
+JavaScript, HTML, CSS, Node.js
 
 
 >
