@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     messages: [
                         {
                             role: "system",
-                            content: `You are a helpful assistant that creates professional resumes. Format the response in HTML with the following specifications
+                            content: `You are a helpful assistant that creates professional resumes. Format the response in HTML with the following specifications. Do not use markdown format!
                             (If something is not provided, please still format it in the correct way. Everything must be on its appropriate line.):
                             - Use Aptos font for the entire document
                             - First line: Full name (First and Last), centered, 18pt font, bold
@@ -67,16 +67,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     downloadButton.addEventListener('click', function () {
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF();
+        const doc = new jspdf.jsPDF({
+            unit: 'pt',
+            format: 'letter'
+        });
 
-        const content = resumePreview.innerHTML;
+        const element = resumePreview;
 
-        const simpleContent = content.replace(/<\/?[^>]+(>|$)/g, ""); 
-
-        pdf.text(simpleContent, 10, 10);
-
-        pdf.save('Resume.pdf');
+        html2canvas(element).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdfWidth = doc.internal.pageSize.getWidth();
+            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+            
+            doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            doc.save('Resume.pdf');
+        });
     });
 });
 
