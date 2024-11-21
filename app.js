@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         {
                             role: "system",
                             content: `You are a helpful assistant that creates professional resumes. Format the response in HTML with the following specifications. Do not use markdown format!
-                            (If something is not provided, please still format it in the correct way. Everything must be on its appropriate line.):
+                            (If something is not provided, please still format it in the correct way. Everything must be on its appropriate line. You can just get rid of that section if it's not there, or leave it blank if it's on the first 3 lines.):
                             - Use Aptos font for the entire document
                             - First line: Full name (First and Last), centered, 18pt font, bold
                             - Second line: centered, 12pt font, format: "City, State, Zipcode | Phone | Email"

@@ -3,6 +3,8 @@
 
 Run in LM Studio LLama 3.2B.
 
+No format it necessary, but a good input example is included below for best performance.
+
 Input example: 
 
 John Doe
