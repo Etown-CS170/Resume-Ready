@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             - Wrap everything in <div style="font-family: 'Aptos', sans-serif;">
                             - First line: <div style="text-align: center; font-size: 18pt; font-weight: bold;">[Full name]</div>
                             - Second line: <div style="text-align: center; font-size: 12pt;">[City, State, Zipcode | Phone | Email]</div>
-                            - Third line: <div style="text-align: center; font-size: 12pt;">LinkedIn: [URL]</div>
+                            - Third line: <div style="text-align: center; font-size: 12pt;">LinkedIn: [URL]</div> (plain text, no hyperlink)
                             - Add <br> after LinkedIn
                             - Rest of content should use <div style="text-align: left; font-size: 12pt;">
                             
