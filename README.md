@@ -26,7 +26,7 @@ Resume-Ready is an AI-powered application designed to help you quickly create pr
 
      ```
      John Doe
-     City, State, ZipCode, Phone: 123-456-7890, Email: johndoe@example.com
+     City, State, Zip Code, Phone: 123-456-7890, Email: johndoe@example.com
      LinkedIn: https://www.linkedin.com/in/johndoe
      B.S. in Computer Science from ABC University
      3 years as a Full Stack Developer at XYZ Corp
