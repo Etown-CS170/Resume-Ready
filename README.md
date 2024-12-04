@@ -31,7 +31,7 @@ Resume-Ready is an AI-powered application designed to help you quickly create pr
      B.S. in Computer Science from ABC University
      3 years as a Full Stack Developer at XYZ Corp
      Project X, Project Y
-     Certified Scrum Master (CSM)
+     SQL Certification
      JavaScript, HTML, CSS, Node.js
      ```
 
