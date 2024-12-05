@@ -70,7 +70,7 @@ async function generateResumeUsingLlama(inputText) {
                 ],
                 stream: false,
                 max_tokens: 2000,
-                temperature: 0.7
+                temperature: 0.1
             }),
         });
 
